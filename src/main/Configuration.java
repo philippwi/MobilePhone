@@ -14,7 +14,7 @@ public enum Configuration {
     public BandType getBandType() {
         try {
             Properties properties = new Properties();
-            FileInputStream fileInputStream = new FileInputStream(userDirectory + fileSeparator + "calculator.props");
+            FileInputStream fileInputStream = new FileInputStream(userDirectory + fileSeparator + "band.props");
             properties.load(fileInputStream);
             fileInputStream.close();
             if (properties.getProperty("bandType").equals("SingleBand"))

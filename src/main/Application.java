@@ -16,7 +16,7 @@ public class Application {
             System.out.println("pathToJar : " + Configuration.instance.pathToJar);
             URL[] urls = {new File(Configuration.instance.pathToJar).toURI().toURL()};
             URLClassLoader urlClassLoader = new URLClassLoader(urls,Application.class.getClassLoader());
-            Class clazz = Class.forName("Calculator",true,urlClassLoader);
+            Class clazz = Class.forName("Band",true,urlClassLoader);
             System.out.println("clazz     : " + clazz.toString());
 
             instance = clazz.getMethod("getInstance",new Class[0]).invoke(null,new Object[0]);
@@ -32,12 +32,24 @@ public class Application {
         }
     }
 
-    public int execute(int a,int b,String operation) {
-        int result = Integer.MAX_VALUE;
+    public boolean connect(String a, String operation) {
+        boolean result=false;
 
         try {
-            Method method = port.getClass().getMethod(operation,int.class,int.class);
-            result = (Integer)method.invoke(port,a,b);
+            Method method = port.getClass().getMethod(operation,String.class);
+            result = (boolean)method.invoke(port,a);
+        } catch (Exception e) {
+            System.out.println("operation " + operation + " not supported.");
+        }
+
+        return result;
+    }
+    public byte[] encrypt(String a, String operation) {
+        byte[] result=null;
+
+        try {
+            Method method = port.getClass().getMethod(operation,String.class);
+            result = (byte[])method.invoke(port,a);
         } catch (Exception e) {
             System.out.println("operation " + operation + " not supported.");
         }
@@ -45,25 +57,29 @@ public class Application {
         return result;
     }
 
-    public boolean isPrime(String string) {
-        boolean result = false;
+    public String decrypt(byte[] a, String operation) {
+        String result=null;
 
         try {
-            Method method = port.getClass().getMethod("isPrime",String.class);
-            result = (Boolean)method.invoke(port,string);
+            Method method = port.getClass().getMethod(operation,byte[].class);
+            result = (String)method.invoke(port,a);
         } catch (Exception e) {
-            System.out.println("operation isPrime not supported.");
+            System.out.println("operation " + operation + " not supported.");
         }
 
         return result;
     }
 
+
     public static void main(String... args) {
         Application application = new Application();
         application.createPhonePortInstance();
-        System.out.println("5 + 3     : " + application.execute(5,3,"add"));
-        System.out.println("5 - 3     : " + application.execute(5,3,"subtract"));
-        System.out.println("5 * 3     : " + application.execute(5,3,"multiply"));
-        System.out.println("3 (prime) : " + application.isPrime("3"));
+
+        //System.out.println("Connected: " + application.connect("ho", "connect")); //funktioniert
+
+        System.out.println("Encrypt: " + application.encrypt("ho", "encrypt"));
+
+        //System.out.println("Decrypt: " + application.decrypt((application.encrypt("hallo", "encrypt")), "decrypt"));
+
     }
 }

@@ -1,43 +1,64 @@
-public class Band implements IMobilePhone {
+import java.lang.reflect.Method;
 
-    public boolean connect(String network) {
+public class Band {
+
+    private static Band instance = new Band();
+    public Port port;
+
+    private Band() {
+        port = new Port();
+    }
+
+    public static Band getInstance() {
+        return instance;
+    }
+
+    public class Port implements IMobilePhone {
+        private Method[] methods = getClass().getMethods();
+
+        public String getVersion() {
+            return innerMethodGetVersion();
+        }
+
+        public boolean connect(String a) {
+            return innerMethodConnect(a);
+        }
+
+        public byte[] encrypt(String a) {
+            return innerMethodEncrypt(a);
+        }
+
+        public String decrypt(byte[] a) {return innerMethodDecrypt(a);}
+
+        public void listMethods() {
+            System.out.println("--- public methods for " + getClass().getName());
+            for (int i = 0; i < methods.length; i++)
+                if (!methods[i].toString().contains("Object") && !methods[i].toString().contains("list"))
+                    System.out.println(methods[i]);
+            System.out.println("---");
+        }
+    }
+
+    public String innerMethodGetVersion(){return "Single Band";}
+
+    public boolean innerMethodConnect(String network) {
 
         return true;
 
     }
 
-    public byte[] encrypt(String message) {
+    public byte[] innerMethodEncrypt(String message) {
 
         byte[] byteMsg = message.getBytes();
 
-        for (int i = 0; i < byteMsg.length; i++) {
-            byte swap1;
-            byte swap2;
-
-            swap1 = byteMsg[i];
-            swap2 = byteMsg[byteMsg.length - 1 - i];
-
-            byteMsg[i] = swap2;
-            byteMsg[byteMsg.length - 1 - i] = swap1;
-        }
         return byteMsg;
     }
 
-    public String decrypt(byte[] message) {
+    public String innerMethodDecrypt(byte[] message) {
 
-        String[] stringMsg = message.toString().split("");
+        String stringMsg = message.toString();
 
-        for (int i = 0; i < stringMsg.length; i++) {
-            String swap1;
-            String swap2;
-
-            swap1 = stringMsg[i];
-            swap2 = stringMsg[stringMsg.length - 1 - i];
-
-            stringMsg[i] = swap2;
-            stringMsg[stringMsg.length - 1 - i] = swap1;
-        }
-return stringMsg.toString();
+        return stringMsg;
 
     }
 }

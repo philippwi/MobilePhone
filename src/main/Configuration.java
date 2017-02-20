@@ -17,9 +17,9 @@ public enum Configuration {
             FileInputStream fileInputStream = new FileInputStream(userDirectory + fileSeparator + "calculator.props");
             properties.load(fileInputStream);
             fileInputStream.close();
-            if (properties.getProperty("calculatorType").equals("SingleBand"))
+            if (properties.getProperty("bandType").equals("SingleBand"))
                 return BandType.SingleBand;
-            else if (properties.getProperty("calculatorType").equals("DualBand"))
+            else if (properties.getProperty("bandType").equals("DualBand"))
                 return BandType.DualBand;
 
             else

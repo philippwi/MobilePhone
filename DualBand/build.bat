@@ -1,11 +1,11 @@
-"%JAVA%\bin\javac" -Xlint:all -g:none -classpath build -d build src\IComponent.java
-"%JAVA%\bin\javac" -Xlint:all -g:none -classpath build -d build src\Component.java
+"%JAVA%\bin\javac" -Xlint:all -g:none -classpath build -d build src\IMobilePhone.java
+"%JAVA%\bin\javac" -Xlint:all -g:none -classpath build -d build src\DualBand.java
 
 cd build
-"%JAVA%\bin\jar" -cvf Component.jar IComponent.class
-"%JAVA%\bin\jar" -uvf Component.jar Component.class
-"%JAVA%\bin\jar" -uvf Component.jar Component$Port.class
+"%JAVA%\bin\jar" -cvf DualBand.jar IMobilePhone.class
+"%JAVA%\bin\jar" -uvf DualBand.jar DualBand.class
+"%JAVA%\bin\jar" -uvf DualBand.jar DualBand$Port.class
 
-move Component.jar ..\Component.jar
+move DualBand.jar ..\DualBand.jar
 
 pause

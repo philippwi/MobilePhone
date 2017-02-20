@@ -16,19 +16,17 @@ public class Band {
     public class Port implements IMobilePhone {
         private Method[] methods = getClass().getMethods();
 
-        public String getVersion() {
-            return innerMethodGetVersion();
-        }
+        public String getVersion() {return innerMethodGetVersion();}
 
         public boolean connect(String a) {
             return innerMethodConnect(a);
         }
 
-        public byte[] encrypt(String a) {
+        public String encrypt(String a) {
             return innerMethodEncrypt(a);
         }
 
-        public String decrypt(byte[] a) {return innerMethodDecrypt(a);}
+        public String decrypt(String a) {return innerMethodDecrypt(a);}
 
         public void listMethods() {
             System.out.println("--- public methods for " + getClass().getName());
@@ -47,16 +45,26 @@ public class Band {
 
     }
 
-    public byte[] innerMethodEncrypt(String message) {
+    public String innerMethodEncrypt(String message) {
 
-        byte[] byteMsg = message.getBytes();
+        //string als rückgabetyp, da String.getBytes() nur die Adresse zurückliefert
+        byte[] byteArray= message.getBytes();
+        String byteMsg = "";
+
+        for(byte b:byteArray) byteMsg+=Byte.toString(b)+" ";
 
         return byteMsg;
     }
 
-    public String innerMethodDecrypt(byte[] message) {
+    public String innerMethodDecrypt(String message) {
 
-        String stringMsg = message.toString();
+        String stringMsg ="";
+
+        String[] splitStr = message.split("\\s+");
+
+        for(int i=0; i<splitStr.length; i++) {
+            stringMsg+=Character.toString((char)Integer.parseInt(splitStr[i]));
+        }
 
         return stringMsg;
 

@@ -44,12 +44,12 @@ public class Application {
 
         return result;
     }
-    public byte[] encrypt(String a, String operation) {
-        byte[] result=null;
+    public String encrypt(String a, String operation) {
+        String result=null;
 
         try {
             Method method = port.getClass().getMethod(operation,String.class);
-            result = (byte[])method.invoke(port,a);
+            result = (String)method.invoke(port,a);
         } catch (Exception e) {
             System.out.println("operation " + operation + " not supported.");
         }
@@ -57,11 +57,11 @@ public class Application {
         return result;
     }
 
-    public String decrypt(byte[] a, String operation) {
+    public String decrypt(String a, String operation) {
         String result=null;
 
         try {
-            Method method = port.getClass().getMethod(operation,byte[].class);
+            Method method = port.getClass().getMethod(operation,String.class);
             result = (String)method.invoke(port,a);
         } catch (Exception e) {
             System.out.println("operation " + operation + " not supported.");

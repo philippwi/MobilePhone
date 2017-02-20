@@ -9,9 +9,9 @@ public enum Configuration {
     public BandType engineType = BandType.SingleBand;
     public String userDirectory = System.getProperty("user.dir");
     public String fileSeparator = System.getProperty("file.separator");
-    public String pathToJar = userDirectory + fileSeparator + getCalculatorType() + fileSeparator + "Calculator.jar";
+    public String pathToJar = userDirectory + fileSeparator + getBandType() + fileSeparator + "Band.jar";
 
-    public BandType getCalculatorType() {
+    public BandType getBandType() {
         try {
             Properties properties = new Properties();
             FileInputStream fileInputStream = new FileInputStream(userDirectory + fileSeparator + "calculator.props");

@@ -9,7 +9,7 @@ public class Application {
     private Object port;
 
     @SuppressWarnings({"rawtypes","unchecked"})
-    public void createCalculatorPortInstance() {
+    public void createPhonePortInstance() {
         Object instance = null;
 
         try {
@@ -60,7 +60,7 @@ public class Application {
 
     public static void main(String... args) {
         Application application = new Application();
-        application.createCalculatorPortInstance();
+        application.createPhonePortInstance();
         System.out.println("5 + 3     : " + application.execute(5,3,"add"));
         System.out.println("5 - 3     : " + application.execute(5,3,"subtract"));
         System.out.println("5 * 3     : " + application.execute(5,3,"multiply"));

@@ -1,4 +1,4 @@
-public class DualBand implements IMobilePhone {
+public class Band implements IMobilePhone {
 
     public boolean connect(String network) {
 
@@ -37,7 +37,7 @@ public class DualBand implements IMobilePhone {
             stringMsg[i] = swap2;
             stringMsg[stringMsg.length - 1 - i] = swap1;
         }
-        return stringMsg.toString();
+return stringMsg.toString();
 
     }
 }

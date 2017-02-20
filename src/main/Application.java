@@ -75,11 +75,11 @@ public class Application {
         Application application = new Application();
         application.createPhonePortInstance();
 
-        //System.out.println("Connected: " + application.connect("ho", "connect")); //funktioniert
+        System.out.println("Connected : " + application.connect("Vodafone", "connect"));
 
-        System.out.println("Encrypt: " + application.encrypt("ho", "encrypt"));
+        System.out.println("Encrypt   : " + application.encrypt("Guten Tag", "encrypt"));
 
-        //System.out.println("Decrypt: " + application.decrypt((application.encrypt("hallo", "encrypt")), "decrypt"));
+        System.out.println("Decrypt   : " + application.decrypt("71 117 116 101 110 32 84 97 103", "decrypt"));
 
     }
 }

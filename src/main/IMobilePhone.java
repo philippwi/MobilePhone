@@ -1,10 +1,11 @@
 package main;
 
 public interface IMobilePhone {
-    boolean connect();
+    
+    boolean connect(String network);
 
-    byte[] encrypt();
+    byte[] encrypt(String message);
 
-    String decrypt();
+    String decrypt(byte[] message);
 
 }
